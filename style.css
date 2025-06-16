@@ -1,0 +1,145 @@
+/* Estilos gerais */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cabeçalho */
+header {
+  margin-bottom: 2rem;
+}
+
+/* Cards */
+.card {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Tabelas */
+.table {
+  margin-bottom: 0;
+}
+
+.table td {
+  vertical-align: middle;
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table td:first-child {
+  max-width: 150px;
+}
+
+.table td[onclick] {
+  cursor: pointer;
+}
+
+.table td[onclick]:hover {
+  background-color: #f8f9fa;
+}
+
+/* Popups */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.popup-content {
+  position: relative;
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #6c757d;
+}
+
+.close:hover {
+  color: #343a40;
+}
+
+/* Resumo */
+#resumoValores {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+#resumoValores hr {
+  margin: 0.5rem 0;
+  border-color: #dee2e6;
+}
+
+/* Botões */
+.btn {
+  font-weight: 500;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Formulários */
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .popup-content {
+    margin: 5% auto;
+    width: 95%;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+
+  .table td:first-child {
+    max-width: 150px;
+  }
+}
