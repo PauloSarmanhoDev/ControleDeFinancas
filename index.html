@@ -3,23 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <title>Controle Financeiro</title>
+  <link rel="icon" href="/img/icon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
-  <!-- Google Ads -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9105267488466372" crossorigin="anonymous"></script>
 
 </head>
 <body>
   <header class="bg-dark">
     <nav class="container py-3">
-      <button id="btnPlanilha" class="btn btn-success active">Planilha</button>
-      <button id="btnInvestimentos" class="btn btn-outline-light">Painel de Investimentos</button>
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="text-light mb-0 d-none d-md-block">Controle Financeiro</h4>
+        <h5 class="text-light mb-0 d-md-none">Finanças</h5>
+        
+        <!-- Menu para desktop -->
+        <div class="d-none d-md-flex">
+          <button id="btnInicial" class="btn btn-primary active">Página Inicial</button>
+          <button id="btnPlanilha" class="btn btn-outline-light">Planilha</button>
+          <button id="btnInvestimentos" class="btn btn-outline-light">Investimentos</button>
+          <button id="btnGraficos" class="btn btn-outline-light">Gráficos</button>
+        </div>
+        
+        <!-- Menu hambúrguer para mobile -->
+        <div class="d-md-none">
+          <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMobile" aria-expanded="false" aria-controls="navbarMobile">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Menu mobile colapsável -->
+      <div class="collapse d-md-none" id="navbarMobile">
+        <div class="d-flex flex-column gap-2 mt-3">
+          <button id="btnInicialMobile" class="btn btn-primary active w-100">Página Inicial</button>
+          <button id="btnPlanilhaMobile" class="btn btn-outline-light w-100">Planilha</button>
+          <button id="btnInvestimentosMobile" class="btn btn-outline-light w-100">Investimentos</button>
+          <button id="btnGraficosMobile" class="btn btn-outline-light w-100">Gráficos</button>
+        </div>
+      </div>
     </nav>
   </header>
   <main class="container py-4">
-    <section id="planilhaSection">
+    <section id="inicialSection">
+      <div class="text-center py-5">
+        <h1 class="display-4 mb-4">Controle Financeiro</h1>
+        <p class="lead mb-4">Gerencie suas finanças de forma simples e eficiente</p>
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body text-center">
+                    <i class="bi bi-table display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Planilha de Controle</h5>
+                    <p class="card-text">Organize suas despesas fixas, compras e receitas em uma planilha intuitiva.</p>
+                    <button class="btn btn-primary" onclick="mostrarSecao('planilha')">Acessar Planilha</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body text-center">
+                    <i class="bi bi-pie-chart display-4 text-success mb-3"></i>
+                    <h5 class="card-title">Gráficos</h5>
+                    <p class="card-text">Visualize seus gastos por categoria através de gráficos interativos.</p>
+                    <button class="btn btn-success" onclick="mostrarSecao('graficos')">Ver Gráficos</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="planilhaSection" style="display:none;">
       <h1 class="mb-4">Controle Financeiro</h1>
       <div class="row g-4">
         <!-- Card Despesas Fixas -->
@@ -145,6 +203,41 @@
         </div>
       </div>
     </section>
+
+    <section id="graficosSection" style="display:none;">
+      <h1 class="mb-4">Gráficos de Gastos</h1>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="h5 mb-0">Distribuição de Gastos por Categoria</h2>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="filtroTipo" class="form-label">Filtrar por tipo:</label>
+                <select id="filtroTipo" class="form-select" onchange="atualizarGrafico()">
+                  <option value="todos">Todos os gastos</option>
+                  <option value="despesasFixas">Despesas Fixas</option>
+                  <option value="debito">Compras Débito</option>
+                  <option value="cartao">Compras Cartão</option>
+                </select>
+              </div>
+              <canvas id="graficoPizza" width="400" height="400"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="h5 mb-0">Resumo dos Gastos</h2>
+            </div>
+            <div class="card-body">
+              <div id="resumoGraficos"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Popups -->
@@ -251,7 +344,36 @@
     </div>
   </div>
 
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h5 class="mb-3">Desenvolvido por Paulo Sarmanho</h5>
+          <div class="d-flex justify-content-center flex-wrap gap-3">
+            <a href="https://www.linkedin.com/in/paulo-sarmanho/" target="_blank" class="btn btn-outline-light btn-sm">
+              <i class="bi bi-linkedin"></i>LinkedIn
+            </a>
+            <a href="https://github.com/PauloSarmanhoDev" target="_blank" class="btn btn-outline-light btn-sm">
+              <i class="bi bi-github"></i>GitHub
+            </a>
+            <a href="https://github.com/PauloSarmanhoDev/ControleDeFinancas" target="_blank" class="btn btn-outline-light btn-sm">
+              <i class="bi bi-code-slash"></i>Repositório
+            </a>
+            <a href="mailto:paulodetarso99@live.com" class="btn btn-outline-light btn-sm">
+              <i class="bi bi-envelope"></i>Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
