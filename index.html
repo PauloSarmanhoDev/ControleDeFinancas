@@ -245,6 +245,10 @@
           </select>
         </div>
       </div>
+      <div class="mb-3">
+        <input type="checkbox" id="considerarFixasGrafico" class="form-check-input" checked onchange="atualizarGrafico()">
+        <label for="considerarFixasGrafico" class="form-check-label">Considerar Despesas Fixas no Gráfico</label>
+      </div>
       <div class="row">
         <div class="col-md-8">
           <div class="card">
@@ -282,7 +286,7 @@
       <h1 class="mb-4">Histórico e Comparação</h1>
       <div class="row">
         <div class="col-12">
-          <div class="card">
+          <div class="card d-none d-md-block">
             <div class="card-header">
               <h2 class="h5 mb-0">Comparação entre Meses</h2>
             </div>
@@ -306,6 +310,8 @@
               </div>
             </div>
           </div>
+          <!-- Cards mobile -->
+          <div id="cardsComparacaoMobile" class="d-block d-md-none"></div>
         </div>
       </div>
     </section>
