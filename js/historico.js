@@ -1,5 +1,16 @@
 import { meses, mesAtual, obterDadosMes } from './meses.js';
 
+// Função temporária para atualizar seletor de meses
+let atualizarSeletorMeses = null;
+
+/**
+ * Define a função atualizarSeletorMeses (chamada pelo main.js)
+ * @param {Function} fn
+ */
+function setAtualizarSeletorMeses(fn) {
+  atualizarSeletorMeses = fn;
+}
+
 /**
  * Renderiza a tabela de comparação de meses (desktop).
  */
@@ -69,4 +80,39 @@ function renderizarCardsComparacaoMobile() {
   });
 }
 
-export { atualizarTabelaComparacao, renderizarCardsComparacaoMobile }; 
+/**
+ * Exclui um mês específico.
+ * @param {string} mesId
+ */
+function excluirMes(mesId) {
+  if (confirm(`Tem certeza que deseja excluir o mês ${mesId}? Esta ação não pode ser desfeita.`)) {
+    delete meses[mesId];
+    localStorage.setItem('meses', JSON.stringify(meses));
+    
+    // Se o mês excluído era o atual, selecionar o próximo mais recente
+    if (mesId === mesAtual) {
+      const mesesRestantes = Object.keys(meses).sort().reverse();
+      if (mesesRestantes.length > 0) {
+        // A função trocarMes será chamada para atualizar a interface
+        const seletorMes = document.getElementById('seletorMes');
+        if (seletorMes) {
+          seletorMes.value = mesesRestantes[0];
+          if (typeof trocarMes === 'function') {
+            trocarMes();
+          }
+        }
+      }
+    }
+    
+    // Atualizar interface
+    atualizarTabelaComparacao();
+    renderizarCardsComparacaoMobile();
+    
+    // Atualizar seletor de meses
+    if (atualizarSeletorMeses) {
+      atualizarSeletorMeses();
+    }
+  }
+}
+
+export { atualizarTabelaComparacao, renderizarCardsComparacaoMobile, excluirMes, setAtualizarSeletorMeses }; 

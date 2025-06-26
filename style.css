@@ -415,3 +415,92 @@ header .btn:hover {
     font-size: 1.1rem;
   }
 }
+
+/* Dark mode */
+body.dark-mode {
+  background-color: #181a1b;
+  color: #e0e0e0;
+}
+body.dark-mode .card {
+  background-color: #23272b;
+  color: #e0e0e0;
+  border-color: #343a40;
+}
+body.dark-mode .card-header {
+  background-color: #23272b;
+  border-bottom: 1px solid #343a40;
+}
+body.dark-mode .table {
+  background-color: #23272b;
+  color: #e0e0e0;
+}
+body.dark-mode .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #202225;
+}
+body.dark-mode .btn,
+body.dark-mode .btn-outline-light {
+  background-color: #23272b;
+  color: #e0e0e0;
+  border-color: #444;
+}
+body.dark-mode .btn-success {
+  background-color: #198754;
+  border-color: #198754;
+}
+body.dark-mode .btn-danger {
+  background-color: #bb2d3b;
+  border-color: #bb2d3b;
+}
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+  background-color: #23272b;
+  color: #e0e0e0;
+  border-color: #444;
+}
+body.dark-mode .form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.15);
+}
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #23272b !important;
+  color: #e0e0e0;
+}
+body.dark-mode .popup-content {
+  background-color: #23272b;
+  color: #e0e0e0;
+}
+body.dark-mode .popup-ajuda-content {
+  background-color: #23272b;
+  color: #e0e0e0;
+}
+body.dark-mode .form-check-input:checked {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+/* Menu mobile melhorado */
+@media (max-width: 768px) {
+  #navbarMobile .btn {
+    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #navbarMobile .btn i {
+    font-size: 1.3rem;
+  }
+}
+
+/* Botão de configurações destacado */
+#btnConfig, #btnConfigMobile {
+  font-size: 1.2rem;
+}
+
+/* Toggle dark mode destacado */
+#btnDarkMode, #btnDarkModeMobile {
+  font-size: 1.2rem;
+}
