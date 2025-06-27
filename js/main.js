@@ -31,8 +31,14 @@ window.onload = function() {
   configurarFormularios();
   // Carrega dados iniciais
   carregarTudo();
-  // Exibe a seção inicial
-  mostrarSecao('inicial');
+
+  // Redirecionamento pós-criação de mês
+  if (localStorage.getItem('abrirPlanilhaAoIniciar') === '1') {
+    localStorage.removeItem('abrirPlanilhaAoIniciar');
+    mostrarSecao('planilha');
+  } else {
+    mostrarSecao('inicial');
+  }
 
   // Eventos para exportar/importar/resetar dados
   const btnExportar = document.getElementById('btnExportar');

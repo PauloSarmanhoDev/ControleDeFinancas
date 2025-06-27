@@ -1,12 +1,31 @@
 import { obterDadosMes, salvarDadosMes, mesAtual, atualizarTabelaDespesasFixas, atualizarTabelaDebito, atualizarTabelaCartao, atualizarTabelaEconomias } from './meses.js';
 import { salvarDados } from './storage.js';
+import { mostrarSecao } from './ui.js';
 
 /**
  * Abre um popup pelo tipo.
  * @param {string} tipo
  */
 function abrirPopup(tipo) {
-  document.getElementById(`popup${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`).style.display = 'block';
+  const popup = document.getElementById(`popup${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`);
+  popup.style.display = 'block';
+
+  // Preenchimento automático para novo mês
+  if (tipo === 'novoMes') {
+    const dados = obterDadosMes(mesAtual);
+    if (dados) {
+      // Preencher salário
+      document.getElementById('novoMesSalario').value = dados.resumo.salario || '';
+      // Calcular sobra
+      const totalDespesasFixas = (dados.despesasFixas || []).reduce((sum, item) => sum + item.valor, 0);
+      const totalDebito = (dados.debitos || []).reduce((sum, item) => sum + item.valor, 0);
+      const totalCartao = (dados.cartoes || []).reduce((sum, item) => sum + item.valor, 0);
+      const receitaTotal = Number(dados.resumo.salario) + Number(dados.resumo.bonus);
+      const dinheiroEmConta = Number(dados.resumo.saldoAnterior) + receitaTotal;
+      const sobra = dinheiroEmConta - totalDespesasFixas - totalDebito - totalCartao;
+      document.getElementById('novoMesSaldoAnterior').value = sobra.toFixed(2);
+    }
+  }
 }
 
 /**
@@ -228,11 +247,9 @@ function configurarFormularios() {
       meses[mesAno] = dadosNovoMes;
       localStorage.setItem('meses', JSON.stringify(meses));
       
-      // Recarregar a página para atualizar tudo
-      location.reload();
-      
-      this.reset();
-      fecharPopup('novoMes');
+      // Redirecionar para a planilha na próxima inicialização
+      localStorage.setItem('abrirPlanilhaAoIniciar', '1');
+      setTimeout(() => location.reload(), 100);
     };
   }
 }
