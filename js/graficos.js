@@ -149,18 +149,7 @@ function atualizarResumoGraficos(gastosPorCategoria) {
   resumoGraficos.innerHTML = html;
 }
 
-/**
- * Troca o mês selecionado nos gráficos.
- */
-function trocarMesGraficos() {
-  const seletorMesGraficos = document.getElementById('seletorMesGraficos');
-  if (seletorMesGraficos && seletorMesGraficos.value) {
-    // A função trocarMesGraficos do módulo meses.js já chama atualizarGrafico
-    // então não precisamos fazer nada aqui
-  }
-}
-
 export { 
   atualizarGrafico, atualizarGraficoComDados, atualizarResumoGraficos, 
-  trocarMesGraficos, graficoPizza 
+  graficoPizza 
 }; 

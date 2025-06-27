@@ -1,8 +1,8 @@
 import { mostrarSecao, setupHeaderEvents, initDarkMode } from './ui.js';
 import { exportarDados, importarDados, resetarDados, abrirPopup, fecharPopup, editarItem, removerItemAtual, configurarFormularios } from './popups.js';
 import { renderizarCardsComparacaoMobile, excluirMes, setAtualizarSeletorMeses } from './historico.js';
-import { trocarMes, criarNovoMes, atualizarResumoForm, carregarTudo, atualizarSeletorMeses, setAbrirPopup, setAtualizarGrafico } from './meses.js';
-import { atualizarGrafico, trocarMesGraficos } from './graficos.js';
+import { trocarMes, criarNovoMes, atualizarResumoForm, carregarTudo, atualizarSeletorMeses, setAbrirPopup, setAtualizarGrafico, trocarMesGraficos } from './meses.js';
+import { atualizarGrafico } from './graficos.js';
 
 // Exporta funções para o escopo global para funcionar com eventos inline
 window.trocarMes = trocarMes;

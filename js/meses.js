@@ -198,11 +198,17 @@ function sincronizarMesesPlanilhaEGrafico(novoMes) {
  * Troca o mês selecionado na planilha.
  */
 function trocarMes() {
+  console.log('Função trocarMes chamada');
   const seletorMes = document.getElementById('seletorMes');
+  console.log('Seletor encontrado:', seletorMes);
   if (seletorMes && seletorMes.value) {
+    console.log('Valor selecionado:', seletorMes.value);
     mesAtual = seletorMes.value;
+    console.log('Mês atual definido como:', mesAtual);
     carregarDadosMes(mesAtual);
     sincronizarMesesPlanilhaEGrafico(mesAtual);
+  } else {
+    console.log('Seletor não encontrado ou sem valor');
   }
 }
 
@@ -210,16 +216,25 @@ function trocarMes() {
  * Troca o mês selecionado nos gráficos.
  */
 function trocarMesGraficos() {
+  console.log('Função trocarMesGraficos chamada');
   const seletorMesGraficos = document.getElementById('seletorMesGraficos');
+  console.log('Seletor encontrado:', seletorMesGraficos);
   if (seletorMesGraficos && seletorMesGraficos.value) {
+    console.log('Valor selecionado:', seletorMesGraficos.value);
     mesAtual = seletorMesGraficos.value;
+    console.log('Mês atual definido como:', mesAtual);
     carregarDadosMes(mesAtual);
     sincronizarMesesPlanilhaEGrafico(mesAtual);
     
     // Atualizar gráfico se estiver na seção de gráficos
     if (typeof atualizarGrafico === 'function') {
+      console.log('Chamando atualizarGrafico');
       atualizarGrafico();
+    } else {
+      console.log('Função atualizarGrafico não está disponível');
     }
+  } else {
+    console.log('Seletor não encontrado ou sem valor');
   }
 }
 
@@ -263,20 +278,22 @@ function atualizarResumo() {
   const totalDespesasFixas = dados.despesasFixas.reduce((sum, item) => sum + item.valor, 0);
   const totalDebito = dados.debitos.reduce((sum, item) => sum + item.valor, 0);
   const totalCartao = dados.cartoes.reduce((sum, item) => sum + item.valor, 0);
+  const totalFixoDebito = totalDespesasFixas + totalDebito;
   const totalGastos = totalDespesasFixas + totalDebito + totalCartao;
   const receitaTotal = dados.resumo.salario + dados.resumo.bonus;
-  const dinheiroEmConta = dados.resumo.saldoAnterior + receitaTotal;
-  const sobra = dinheiroEmConta - totalGastos;
+  const dinheiroMes = dados.resumo.saldoAnterior + receitaTotal;
+  const dinheiroEmConta = dinheiroMes - totalDespesasFixas - totalDebito;
+  const sobra = dinheiroMes - totalGastos;
 
   resumoValores.innerHTML = `
     <div class="row g-2">
       <div class="col-6">
-        <small class="text-muted">Receita Total:</small><br>
-        <strong class="text-success">R$ ${receitaTotal.toFixed(2)}</strong>
+        <small class="text-muted">Dinheiro do Mês:</small><br>
+        <strong class="text-success">R$ ${dinheiroMes.toFixed(2)}</strong>
       </div>
       <div class="col-6">
-        <small class="text-muted">Despesas Fixas:</small><br>
-        <strong class="text-danger">R$ ${totalDespesasFixas.toFixed(2)}</strong>
+        <small class="text-muted">Pagamentos à vista:</small><br>
+        <strong class="text-danger">R$ ${totalFixoDebito.toFixed(2)}</strong>
       </div>
       <div class="col-6">
         <small class="text-muted">Débito:</small><br>
