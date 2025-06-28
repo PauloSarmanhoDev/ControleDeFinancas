@@ -287,28 +287,32 @@ function atualizarResumo() {
 
   resumoValores.innerHTML = `
     <div class="row g-2">
-      <div class="col-6">
-        <small class="text-muted">Dinheiro do Mês:</small><br>
+      <div class="col-12">
+        <b class="text-muted">Dinheiro do Mês:</b>
+        <br>
         <strong class="text-success">R$ ${dinheiroMes.toFixed(2)}</strong>
       </div>
-      <div class="col-6">
-        <small class="text-muted">Pagamentos à vista:</small><br>
-        <strong class="text-danger">R$ ${totalFixoDebito.toFixed(2)}</strong>
+      <div class="col-12">
+        <b class="text-muted">Despesas Fixas:</b><br>
+        <strong class="text-danger">R$ ${totalDespesasFixas.toFixed(2)}</strong>
       </div>
-      <div class="col-6">
-        <small class="text-muted">Débito:</small><br>
+      <div class="col-12">
+        <b class="text-muted">Débito:</b><br>
         <strong class="text-warning">R$ ${totalDebito.toFixed(2)}</strong>
       </div>
-      <div class="col-6">
-        <small class="text-muted">Cartão:</small><br>
+      <div class="col-12">
+        <b class="text-muted">Cartão:</b><br>
         <strong class="text-info">R$ ${totalCartao.toFixed(2)}</strong>
       </div>
-      <div class="col-6">
-        <small class="text-muted">Dinheiro em Conta:</small><br>
+      <div class="col-12">
+        <b class="text-muted">Dinheiro em Conta:</b>
+        <br>
         <strong class="text-primary">R$ ${dinheiroEmConta.toFixed(2)}</strong>
       </div>
-      <div class="col-6">
-        <small class="text-muted">Sobra:</small><br>
+      <div class="col-12">
+        <b class="text-muted">Sobra:</b>
+        <br>
+
         <strong class="${sobra >= 0 ? 'text-success' : 'text-danger'}">R$ ${sobra.toFixed(2)}</strong>
       </div>
     </div>
